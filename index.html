@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Water Monitor</title>
+    <link rel="stylesheet" href="C:\Users\isaac\Desktop\Booplan Project\style.css" />
+    <script src="C:\Users\isaac\Desktop\Booplan Project\script.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">IoT Mini Project</p>
+          <h1>Smart Water Monitoring System</h1>
+        </div>
+        <div class="status-pill" id="system-status">LOADING</div>
+      </header>
+
+      <main class="dashboard">
+        <section class="cards-grid">
+          <article class="card level-card">
+            <div class="card-head">
+              <span>Water Level</span>
+              <span class="tag">Tank</span>
+            </div>
+            <div class="gauge-wrap">
+              <div class="gauge" id="level-gauge">
+                <div class="gauge-inner">
+                  <strong id="level-percent">0%</strong>
+                  <small id="level-cm">0 cm</small>
+                </div>
+              </div>
+            </div>
+            <p id="level-reading">Waiting for data...</p>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <span>Water Quality</span>
+              <span class="tag warning">TDS</span>
+            </div>
+            <h2 id="tds-value">0 ppm</h2>
+            <p class="muted">Educational prototype sensor. Not a certified drinking-water safety device.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <span>Flow Rate</span>
+              <span class="tag info">L/min</span>
+            </div>
+            <h2 id="flow-rate">0.00</h2>
+            <p class="muted" id="flow-details">Waiting for data...</p>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <span>Total Consumption</span>
+              <span class="tag success">Litres</span>
+            </div>
+            <h2 id="total-consumption">0.00 L</h2>
+            <p class="muted">Cumulative tank usage</p>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <span>Pump Status</span>
+              <span class="tag" id="pump-tag">UNKNOWN</span>
+            </div>
+            <h2 id="pump-status-text">OFF</h2>
+            <div class="button-row">
+              <button class="primary" id="pump-on-btn" data-state="ON">Pump ON</button>
+              <button class="secondary" id="pump-off-btn" data-state="OFF">Pump OFF</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <span>System Status</span>
+              <span class="tag info">Live</span>
+            </div>
+            <h2 id="overall-status">NORMAL</h2>
+            <p class="muted" id="alerts-summary">No active alerts</p>
+          </article>
+
+          <article class="card safety-card">
+            <div class="card-head">
+              <span>Water Safety</span>
+              <span class="tag warning" id="safety-badge">CHECK</span>
+            </div>
+            <h2 id="safety-status">UNKNOWN</h2>
+            <p class="muted" id="safety-message">Enter test values to evaluate drinking-water safety.</p>
+          </article>
+        </section>
+
+        <section class="panel safety-panel">
+          <div class="panel-header">
+            <h3>Drinking Water Safety Test</h3>
+          </div>
+
+          <div class="safety-form-grid">
+            <label>
+              pH
+              <input id="water-ph" type="number" min="0" max="14" step="0.1" value="7.0" />
+            </label>
+
+            <label>
+              Turbidity (NTU)
+              <input id="water-turbidity" type="number" min="0" step="0.1" value="1.0" />
+            </label>
+
+            <label>
+              Chlorine (mg/L)
+              <input id="water-chlorine" type="number" min="0" step="0.1" value="1.0" />
+            </label>
+
+            <label>
+              Microbial risk
+              <select id="microbial-risk">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+
+            <label>
+              Contaminant risk
+              <select id="contamination-risk">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="button-row safety-button-row">
+            <button class="primary" id="safety-check-btn">Check Water Safety</button>
+          </div>
+
+          <div id="safety-result" class="safety-result neutral">
+            <strong>Result:</strong>
+            <span>Waiting for water quality check.</span>
+          </div>
+        </section>
+
+        <section class="panel-grid">
+          <article class="panel chart-panel">
+            <div class="panel-header">
+              <h3>Water Level Trend</h3>
+            </div>
+            <canvas id="levelChart"></canvas>
+          </article>
+
+          <article class="panel chart-panel">
+            <div class="panel-header">
+              <h3>Water Quality (TDS)</h3>
+            </div>
+            <canvas id="tdsChart"></canvas>
+          </article>
+
+          <article class="panel chart-panel full-width">
+            <div class="panel-header">
+              <h3>Consumption Trend</h3>
+            </div>
+            <canvas id="flowChart"></canvas>
+          </article>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Active Alerts</h3>
+          </div>
+          <div id="alerts-list" class="alerts-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
